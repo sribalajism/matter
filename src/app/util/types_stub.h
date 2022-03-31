@@ -502,12 +502,12 @@ struct EmberBindingTableEntry
                                           chip::EndpointId remoteEndpoint, chip::Optional<chip::ClusterId> cluster)
     {
         EmberBindingTableEntry entry = {
-            .type        = EMBER_UNICAST_BINDING,
-            .fabricIndex = fabric,
-            .local       = localEndpoint,
-            .clusterId   = cluster,
-            .remote      = remoteEndpoint,
-            .nodeId      = node,
+            EMBER_UNICAST_BINDING,
+            fabric,
+            localEndpoint,
+            cluster,
+            remoteEndpoint,
+            node
         };
         return entry;
     }
@@ -516,12 +516,12 @@ struct EmberBindingTableEntry
                                            chip::Optional<chip::ClusterId> cluster)
     {
         EmberBindingTableEntry entry = {
-            .type        = EMBER_MULTICAST_BINDING,
-            .fabricIndex = fabric,
-            .local       = localEndpoint,
-            .clusterId   = cluster,
-            .remote      = 0,
-            .groupId     = group,
+             EMBER_MULTICAST_BINDING,
+            fabric,
+            localEndpoint,
+            cluster,
+            0,
+            group
         };
         return entry;
     }

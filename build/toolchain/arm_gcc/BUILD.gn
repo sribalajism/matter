@@ -15,7 +15,19 @@
 
 import("arm_toolchain.gni")
 
-arm_toolchain("arm_gcc") {
+gcc_toolchain("arm-buildroot") {
+  _tool_name_root = "/opt/toolchain/crosstools-arm-gcc-7.2-linux-4.1-glibc-2.26-binutils-2.28.1/bin/"  
+  _toolprefix = _tool_name_root + "arm-buildroot-linux-gnueabi-"
+
+  cc = "${_toolprefix}gcc"
+  cxx = "${_toolprefix}g++"
+  ar = "${_toolprefix}ar"
+
   toolchain_args = {
+    current_os = "linux"
+    current_cpu = "arm"
+    is_clang = false
   }
+
 }
+

@@ -1,3 +1,4 @@
+# Copyright 2020 The Pigweed Authors
 # Copyright (c) 2020 Project CHIP Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,23 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//build_overrides/build.gni")
+import("arm_toolchain.gni")
 
-import("${build_root}/toolchain/gcc_toolchain.gni")
+gcc_toolchain("aarch64-none") {
+  _tool_name_root = "/opt/toolchain/aarch64_arm/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/"  
+  _toolprefix = _tool_name_root + "aarch64-none-linux-gnu-"
 
-template("arm_toolchain") {
-  gcc_toolchain("arm-buildroot") {
-    _tool_name_root = "/opt/toolchain/crosstools-arm-gcc-7.2-linux-4.1-glibc-2.26-binutils-2.28.1/binarm-buildroot-linux-gnueabi-"
-    ar = _tool_name_root + "ar"
-    cc = _tool_name_root + "gcc"
-    cxx = _tool_name_root + "g++"
+  cc = "${_toolprefix}gcc"
+  cxx = "${_toolprefix}g++"
+  ar = "${_toolprefix}ar"
 
-    toolchain_args = {
-      current_cpu = "arm"
-      current_os = invoker.current_os
-      is_clang = false
-
-      forward_variables_from(invoker.toolchain_args, "*")
-    }
+  toolchain_args = {
+    current_os = "linux"
+    current_cpu = "arm64"
+    is_clang = false
   }
+
 }
+
